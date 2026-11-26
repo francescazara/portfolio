@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Francesca Zara · Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* VOICE: editoriale e asciutto, come un portfolio da studio di moda
+   IDEA: un lookbook di tavole: ogni progetto si sfoglia come una presentazione stampata
+   PICTURE: le copertine dei progetti in fila sotto il nome, poi le tavole a tutta larghezza
+   COLOUR and TYPE: grigio carta, nero pieno, piccole etichette mono; Inter Tight + IBM Plex Mono
+   LAYOUT: barra mono, nome gigante, striscia di copertine, quattro progetti, competenze, contatti */
+:root{color-scheme:light dark;--bg:light-dark(#e9e8e4,#121212);--ink:light-dark(#141414,#ecebe7);--mut:light-dark(#6b6a66,#97958f);--ln:light-dark(#141414,#ecebe7);--soft:light-dark(#d6d4ce,#2a2a29)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:56px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 "Inter Tight",Inter,system-ui,sans-serif;overflow-x:clip}
+img{display:block;max-width:100%}
+a{color:inherit}
+p{margin:0}
+.mono{font:500 12px/1.4 "IBM Plex Mono",ui-monospace,monospace;text-transform:uppercase;letter-spacing:.03em}
+.wrap{max-width:1440px;margin:0 auto;padding:0 max(4vw,16px)}
+h1,h2{font-weight:600;letter-spacing:-.045em;line-height:.9;margin:0}
+/* bar */
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--ln)}
+.bar .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;min-height:48px;gap:16px}
+.bar nav{display:flex;gap:22px;justify-self:end}
+.bar nav a{text-decoration:none;padding:12px 0}
+.bar nav a:hover{text-decoration:underline}
+.bar .c{color:var(--mut)}
+/* hero */
+.hero{padding:clamp(40px,6vw,88px) 0 0}
+.hero .top{display:flex;justify-content:space-between;gap:16px;color:var(--mut);margin-bottom:20px;flex-wrap:wrap}
+h1{font-size:clamp(52px,9.5vw,148px);letter-spacing:-.05em;line-height:.88}
+.intro{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,3vw,48px);margin-top:clamp(28px,4vw,56px);padding-top:18px;border-top:1px solid var(--ln)}
+.intro p.l{font-size:clamp(18px,1.5vw,21px);line-height:1.3;letter-spacing:-.01em;max-width:30em}
+.cta{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.cta a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1px solid var(--ln);text-decoration:none;font:500 13px "IBM Plex Mono",monospace;text-transform:uppercase}
+.cta a:first-child{background:var(--ink);color:var(--bg)}
+.cta a:hover{background:var(--ink);color:var(--bg)}
+.intro dl{margin:0;display:grid;gap:12px}
+.intro dt{color:var(--mut)}
+.intro dd{margin:2px 0 0}
+.brand{text-decoration:none}
+.bar .mn{display:none}
+.mhead{display:none}
+@media(max-width:700px){
+ .dn{display:none!important}
+ .mn{display:flex!important;justify-self:end}
+ .bar .wrap{grid-template-columns:auto 1fr}
+ .mb{display:inline-flex;align-items:center;min-height:36px;padding:0 12px;font-size:11px;background:var(--ink);color:var(--bg);text-decoration:none;white-space:nowrap}
+ body.vp .to-p,body:not(.vp) .to-h{display:none}
+ body:not(.vp) .p-only{display:none}
+ body.vp .h-only{display:none}
+ .mhead{display:block;padding:28px 0 18px}
+ .mhead h2{margin:8px 0 8px}
+ .mhead p{color:var(--mut);font-size:15px}
+ #progetti .strip{margin-top:0;grid-template-columns:repeat(2,minmax(0,1fr))}
+ .proj{padding-top:44px}
+ .hero .cta a:first-child{min-height:52px;padding:0 22px;font-size:14px}
+}
+.note{display:grid;grid-template-columns:minmax(0,10em) minmax(0,1fr);gap:clamp(12px,3vw,40px);margin:0 0 clamp(28px,4vw,48px);padding:18px 0;border-top:1px solid var(--ln);border-bottom:1px solid var(--ln)}
+.note .mono{color:var(--mut)}
+.note p{max-width:62em;font-size:16px}
+.strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(8px,1vw,16px);margin-top:clamp(36px,5vw,72px)}
+.strip a{text-decoration:none;display:grid;gap:8px}
+.strip img{aspect-ratio:16/9;object-fit:cover;width:100%;transition:transform .4s}
+.strip a:hover img{transform:translateY(-4px)}
+@media (prefers-reduced-motion:reduce){.strip img{transition:none}}
+/* project */
+.proj{padding:clamp(56px,8vw,120px) 0 0}
+.meta{display:flex;justify-content:space-between;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--ln);flex-wrap:wrap}
+.phead{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(20px,4vw,64px);align-items:end;padding:clamp(22px,3vw,40px) 0}
+h2{font-size:clamp(34px,4.4vw,64px);line-height:.95}
+.phead .sub{font-size:18px;color:var(--mut);margin:0;max-width:30em}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,3vw,40px);padding-bottom:clamp(22px,3vw,36px)}
+.cols div{border-top:1px solid var(--soft);padding-top:10px}
+.cols .mono{color:var(--mut);display:block;margin-bottom:6px}
+.cols p{font-size:16px}
+.track{display:flex;gap:clamp(8px,1vw,16px);overflow-x:auto;scroll-snap-type:x mandatory;padding:0 max(4vw,16px);scroll-padding:0 max(4vw,16px);scrollbar-width:none}
+.track::-webkit-scrollbar{display:none}
+.track:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+.track figure{margin:0;flex:0 0 min(1100px,86vw);scroll-snap-align:start}
+.track button.z{all:unset;cursor:zoom-in;display:block;width:100%}
+.track img{width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--soft)}
+.vfig{position:relative}
+.vfig video{position:absolute;object-fit:cover;border-radius:2.2%/1.25%;background:#000}
+.reels{margin-top:clamp(28px,4vw,48px)}
+.reels>.mono{color:var(--mut);display:block;margin-bottom:12px}
+.rv{display:flex;gap:16px;flex-wrap:wrap}
+.rv figure{margin:0;width:min(270px,44vw)}
+.rv video{width:100%;aspect-ratio:9/16;background:#000;display:block;object-fit:cover}
+.rv figcaption{font-size:14px;margin-top:8px;display:grid;gap:2px}
+.rv figcaption .mono{color:var(--mut)}
+.ctl{display:flex;align-items:center;gap:8px;margin-top:14px}
+.ctl button{width:44px;height:44px;border:1px solid var(--ln);background:transparent;color:var(--ink);font-size:18px;cursor:pointer;border-radius:0}
+.ctl button:hover{background:var(--ink);color:var(--bg)}
+.ctl button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.ctl output{margin-left:10px}
+.ctl .hint{margin-left:auto;color:var(--mut)}
+/* skills */
+.skills{padding:clamp(72px,10vw,150px) 0 0}
+.skills h2,.contact h2{margin:20px 0 clamp(24px,3vw,40px)}
+.sk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:clamp(16px,3vw,40px)}
+.sk div{border-top:1px solid var(--ln);padding:12px 0 26px}
+.sk h3{margin:0 0 6px;font-size:21px;font-weight:600;letter-spacing:-.015em}
+.sk p{color:var(--mut);font-size:16px}
+/* contact */
+.contact{padding:clamp(72px,10vw,150px) 0 clamp(28px,4vw,48px)}
+.big{font-weight:600;font-size:clamp(22px,3.4vw,48px);letter-spacing:-.04em;line-height:1;text-decoration:none;overflow-wrap:anywhere;display:inline-block}
+.big:hover{text-decoration:underline;text-decoration-thickness:2px}
+.cl{display:grid;gap:16px;margin-top:10px}
+footer{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--ln);padding:14px 0;color:var(--mut);flex-wrap:wrap}
+/* lightbox */
+dialog{border:0;padding:0;background:transparent;max-width:96vw;max-height:94vh}
+dialog::backdrop{background:rgb(10 10 10/.92)}
+dialog img{max-width:96vw;max-height:88vh;margin:auto}
+dialog .x{position:fixed;top:12px;right:12px;width:44px;height:44px;border:1px solid #fff;background:#141414;color:#fff;font-size:18px;cursor:pointer}
+dialog .nv{position:fixed;top:50%;width:44px;height:44px;margin-top:-22px;border:1px solid #fff;background:#141414;color:#fff;font-size:18px;cursor:pointer}
+dialog .pv{left:12px}dialog .nx{right:12px}
+@media(max-width:900px){
+ .intro{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.intro p.l{grid-column:1/-1}
+ .phead{grid-template-columns:minmax(0,1fr)}
+ .strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .sk{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .ctl .hint{display:none}
+}
+@media(max-width:600px){.note{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){
+ .bar .c{display:none}.bar .wrap{grid-template-columns:auto 1fr}.bar nav{gap:14px}
+ .intro{grid-template-columns:minmax(0,1fr)}
+ .cols,.sk{grid-template-columns:minmax(0,1fr)}
+ .track figure{flex-basis:90vw}
+}
+</style>
+</head>
+<body>
+<header class="bar"><div class="wrap mono"><a class="brand" href="#home">Francesca Zara</a><span class="c">Social media manager, Roma</span><nav class="dn"><a href="#progetti">Lavori</a><a href="#competenze">Profilo</a><a href="#contatti">Contatti</a></nav><nav class="mn"><a class="mb to-p" href="#progetti">Scopri i progetti →</a><a class="mb to-h" href="#home">← Profilo</a></nav></div></header>
+
+<main>
+<section class="hero h-only" id="home"><div class="wrap">
+ <div class="top mono"><span>Portfolio 2026</span><span>Social media · Contenuti · Strategia</span><span>05 progetti</span></div>
+ <h1>Francesca<br>Zara</h1>
+ <div class="intro">
+  <div><p class="l">Social media manager con oltre due anni tra agenzia e alta gioielleria. Seguo l'intero ciclo dei contenuti: strategia, piano editoriale, copy in italiano e inglese, grafiche, Reel e analisi dei risultati.</p><p class="cta"><a href="#progetti">Scopri i progetti</a><a href="#contatti">Scrivimi</a></p></div>
+  <dl class="mono"><div><dt>Oggi</dt><dd>Gismondi 1754, alta gioielleria</dd></div><div><dt>Prima</dt><dd>Morris Consulting Europe, digital marketing</dd></div></dl>
+  <dl class="mono"><div><dt>Formazione</dt><dd>Laurea magistrale in Marketing &amp; Digital Communication, LUMSA, 110 e lode</dd></div><div><dt>Base</dt><dd>Roma</dd></div></dl>
+ </div>
+ </div></section>
+<section class="p-only" id="progetti"><div class="wrap"><div class="mhead"><span class="mono">Portfolio · 05 progetti</span><h2>I progetti</h2><p>Tocca una copertina per andare al progetto, poi scorri le tavole.</p></div><div class="strip"><a href="#gismondi"><img src="img/gis-01.jpg" alt=""><span class="mono">01 Gismondi 1754</span></a><a href="#agenzia"><img src="img/ag-01.jpg" alt=""><span class="mono">02 Lavori in agenzia</span></a><a href="#upside"><img src="img/up-01.jpg" alt=""><span class="mono">03 Upside.wrld</span></a><a href="#inclusione"><img src="img/int-01.jpg" alt=""><span class="mono">04 Rimesse senza barriere</span></a><a href="#grafiche"><img src="img/gra-01.jpg" alt=""><span class="mono">05 Grafiche per eventi</span></a></div></div></section>
+<div class="p-only">
+
+<section class="proj" id="gismondi">
+ <div class="wrap">
+  <div class="meta mono"><span>01</span><span>Lavoro · 2026</span><span>8 tavole</span></div>
+  <div class="phead">
+   <h2>Gismondi 1754</h2>
+   <p class="sub">Piano editoriale Instagram di dicembre per l'alta gioielleria</p>
+  </div>
+  <div class="cols"><div><span class="mono">Ruolo</span><p>Junior Social Media &amp; AI Specialist, da aprile 2026</p></div><div><span class="mono">Cosa ho fatto</span><p>Piano editoriale, copy in inglese, Stories, Reel, still life</p></div><div><span class="mono">Software</span><p>Canva, Photoshop, Meta Business Suite</p></div></div>
+ </div>
+ <div class="car" data-car>
+  <div class="track" tabindex="0" aria-label="Tavole di Gismondi 1754"><figure><button class="z" aria-label="Ingrandisci tavola 1"><img loading="lazy" src="img/gis-01.jpg" alt="Gismondi 1754, tavola 1"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 2"><img loading="lazy" src="img/gis-02.jpg" alt="Gismondi 1754, tavola 2"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 3"><img loading="lazy" src="img/gis-03.jpg" alt="Gismondi 1754, tavola 3"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 4"><img loading="lazy" src="img/gis-04.jpg" alt="Gismondi 1754, tavola 4"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 5"><img loading="lazy" src="img/gis-05.jpg" alt="Gismondi 1754, tavola 5"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 6"><img loading="lazy" src="img/gis-06.jpg" alt="Gismondi 1754, tavola 6"></button></figure><figure class="vfig"><img loading="lazy" src="img/gis-07.jpg" alt="Gismondi 1754, tavola 7: Reel"><video controls playsinline preload="none" poster="vid/poster-modella.jpg" src="vid/reel-modella.mp4" style="left:43.5%;top:11.78%;width:22.5%;height:71.11%"></video><video controls playsinline preload="none" poster="vid/poster-evento.jpg" src="vid/reel-evento.mp4" style="left:70%;top:11.78%;width:22.5%;height:71.11%"></video></figure><figure><button class="z" aria-label="Ingrandisci tavola 8"><img loading="lazy" src="img/gis-08.jpg" alt="Gismondi 1754, tavola 8"></button></figure></div>
+  <div class="wrap ctl"><button data-p aria-label="Tavola precedente">←</button><button data-n aria-label="Tavola successiva">→</button><output class="mono"></output><span class="mono hint">Clic sulla tavola per ingrandire</span></div>
+ </div>
+</section>
+<section class="proj" id="agenzia">
+ <div class="wrap">
+  <div class="meta mono"><span>02</span><span>Lavoro · 2024–2025</span><span>7 tavole</span></div>
+  <div class="phead">
+   <h2>Lavori in agenzia</h2>
+   <p class="sub">Digital marketing per PMI, eventi e finanza agevolata</p>
+  </div>
+  <div class="cols"><div><span class="mono">Ruolo</span><p>Junior Digital Marketing Specialist, 2024–2025</p></div><div><span class="mono">Cosa ho fatto</span><p>Social per i clienti, campagne paid, siti ed e-commerce, articoli SEO, DEM, finanza agevolata</p></div><div><span class="mono">Software</span><p>Meta e Google Ads, WordPress, Brevo, Google Analytics, Canva</p></div></div>
+ </div>
+ <div class="car" data-car>
+  <div class="track" tabindex="0" aria-label="Tavole di Lavori in agenzia"><figure><button class="z" aria-label="Ingrandisci tavola 1"><img loading="lazy" src="img/ag-01.jpg" alt="Lavori in agenzia, tavola 1"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 2"><img loading="lazy" src="img/ag-02.jpg" alt="Lavori in agenzia, tavola 2"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 3"><img loading="lazy" src="img/ag-03.jpg" alt="Lavori in agenzia, tavola 3"></button></figure><figure class="vfig"><img loading="lazy" src="img/ag-04.jpg" alt="Lavori in agenzia, tavola 4: Reel"><video controls playsinline preload="none" poster="vid/poster-speed.jpg" src="vid/reel-speed.mp4" style="left:44.44%;top:11.78%;width:21.81%;height:68.89%"></video></figure><figure><button class="z" aria-label="Ingrandisci tavola 5"><img loading="lazy" src="img/ag-05.jpg" alt="Lavori in agenzia, tavola 5"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 6"><img loading="lazy" src="img/ag-06.jpg" alt="Lavori in agenzia, tavola 6"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 7"><img loading="lazy" src="img/ag-07.jpg" alt="Lavori in agenzia, tavola 7"></button></figure></div>
+  <div class="wrap ctl"><button data-p aria-label="Tavola precedente">←</button><button data-n aria-label="Tavola successiva">→</button><output class="mono"></output><span class="mono hint">Clic sulla tavola per ingrandire</span></div>
+ </div>
+</section>
+<section class="proj" id="upside">
+ <div class="wrap">
+  <div class="meta mono"><span>03</span><span>Progetto universitario · 2023</span><span>12 tavole</span></div>
+  <div class="phead">
+   <h2>Upside.wrld</h2>
+   <p class="sub">Social media strategy per un brand streetwear</p>
+  </div>
+  <div class="cols"><div><span class="mono">Ruolo</span><p>Social media strategy, progetto LUMSA 2023</p></div><div><span class="mono">Cosa ho fatto</span><p>Analisi di mercato, strategia, post delle campagne, Meta Ads, KPI e budget</p></div><div><span class="mono">Software</span><p>Canva, Meta Business Suite</p></div></div>
+ </div>
+ <div class="car" data-car>
+  <div class="track" tabindex="0" aria-label="Tavole di Upside.wrld"><figure><button class="z" aria-label="Ingrandisci tavola 1"><img loading="lazy" src="img/up-01.jpg" alt="Upside.wrld, tavola 1"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 2"><img loading="lazy" src="img/up-02.jpg" alt="Upside.wrld, tavola 2"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 3"><img loading="lazy" src="img/up-03.jpg" alt="Upside.wrld, tavola 3"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 4"><img loading="lazy" src="img/up-04.jpg" alt="Upside.wrld, tavola 4"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 5"><img loading="lazy" src="img/up-05.jpg" alt="Upside.wrld, tavola 5"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 6"><img loading="lazy" src="img/up-06.jpg" alt="Upside.wrld, tavola 6"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 7"><img loading="lazy" src="img/up-07.jpg" alt="Upside.wrld, tavola 7"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 8"><img loading="lazy" src="img/up-08.jpg" alt="Upside.wrld, tavola 8"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 9"><img loading="lazy" src="img/up-09.jpg" alt="Upside.wrld, tavola 9"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 10"><img loading="lazy" src="img/up-10.jpg" alt="Upside.wrld, tavola 10"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 11"><img loading="lazy" src="img/up-11.jpg" alt="Upside.wrld, tavola 11"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 12"><img loading="lazy" src="img/up-12.jpg" alt="Upside.wrld, tavola 12"></button></figure></div>
+  <div class="wrap ctl"><button data-p aria-label="Tavola precedente">←</button><button data-n aria-label="Tavola successiva">→</button><output class="mono"></output><span class="mono hint">Clic sulla tavola per ingrandire</span></div>
+ </div>
+</section>
+<section class="proj" id="inclusione">
+ <div class="wrap">
+  <div class="meta mono"><span>04</span><span>Progetto universitario · 2022</span><span>8 tavole</span></div>
+  <div class="phead">
+   <h2>Rimesse senza barriere</h2>
+   <p class="sub">Piano marketing per l'inclusione finanziaria, case study su Intesa Sanpaolo</p>
+  </div>
+  <div class="cols"><div><span class="mono">Ruolo</span><p>Analisi e pianificazione marketing, progetto LUMSA 2022</p></div><div><span class="mono">Cosa ho fatto</span><p>Analisi del contesto, target, marketing mix, piano di comunicazione</p></div><div><span class="mono">Software</span><p>Canva</p></div></div>
+ </div>
+ <div class="car" data-car>
+  <div class="track" tabindex="0" aria-label="Tavole di Rimesse senza barriere"><figure><button class="z" aria-label="Ingrandisci tavola 1"><img loading="lazy" src="img/int-01.jpg" alt="Rimesse senza barriere, tavola 1"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 2"><img loading="lazy" src="img/int-02.jpg" alt="Rimesse senza barriere, tavola 2"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 3"><img loading="lazy" src="img/int-03.jpg" alt="Rimesse senza barriere, tavola 3"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 4"><img loading="lazy" src="img/int-04.jpg" alt="Rimesse senza barriere, tavola 4"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 5"><img loading="lazy" src="img/int-05.jpg" alt="Rimesse senza barriere, tavola 5"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 6"><img loading="lazy" src="img/int-06.jpg" alt="Rimesse senza barriere, tavola 6"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 7"><img loading="lazy" src="img/int-07.jpg" alt="Rimesse senza barriere, tavola 7"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 8"><img loading="lazy" src="img/int-08.jpg" alt="Rimesse senza barriere, tavola 8"></button></figure></div>
+  <div class="wrap ctl"><button data-p aria-label="Tavola precedente">←</button><button data-n aria-label="Tavola successiva">→</button><output class="mono"></output><span class="mono hint">Clic sulla tavola per ingrandire</span></div>
+ </div>
+</section>
+<section class="proj" id="grafiche">
+ <div class="wrap">
+  <div class="meta mono"><span>05</span><span>Grafica</span><span>3 tavole</span></div>
+  <div class="phead">
+   <h2>Grafiche per eventi</h2>
+   <p class="sub">Menu e locandine per ristorazione e radio</p>
+  </div>
+  <div class="cols"><div><span class="mono">Ruolo</span><p>Graphic design per clienti</p></div><div><span class="mono">Cosa ho fatto</span><p>Menu e locandine per stampa e Instagram</p></div><div><span class="mono">Software</span><p>Canva</p></div></div>
+ </div>
+ <div class="car" data-car>
+  <div class="track" tabindex="0" aria-label="Tavole di Grafiche per eventi"><figure><button class="z" aria-label="Ingrandisci tavola 1"><img loading="lazy" src="img/gra-01.jpg" alt="Grafiche per eventi, tavola 1"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 2"><img loading="lazy" src="img/gra-02.jpg" alt="Grafiche per eventi, tavola 2"></button></figure><figure><button class="z" aria-label="Ingrandisci tavola 3"><img loading="lazy" src="img/gra-03.jpg" alt="Grafiche per eventi, tavola 3"></button></figure></div>
+  <div class="wrap ctl"><button data-p aria-label="Tavola precedente">←</button><button data-n aria-label="Tavola successiva">→</button><output class="mono"></output><span class="mono hint">Clic sulla tavola per ingrandire</span></div>
+ </div>
+</section>
+
+</div>
+<section class="skills h-only" id="competenze"><div class="wrap">
+ <div class="meta mono"><span>06</span><span>Profilo</span><span>Competenze e strumenti</span></div>
+ <h2>Cosa so fare</h2>
+ <div class="sk">
+  <div><h3>Social media management</h3><p>Instagram, Facebook, LinkedIn. Piano editoriale, Reel, Stories, community.</p></div>
+  <div><h3>Copywriting</h3><p>Testi in italiano e inglese, tono di voce per brand del lusso.</p></div>
+  <div><h3>Advertising</h3><p>Meta Ads, Google Ads, LinkedIn Ads: pianificazione e ottimizzazione.</p></div>
+  <div><h3>Contenuti e grafica</h3><p>Canva, Adobe Creative Cloud, strumenti di AI generativa.</p></div>
+  <div><h3>Analisi</h3><p>Meta Business Suite, Google Analytics, Google Tag Manager, report mensili.</p></div>
+  <div><h3>Web, SEO ed email</h3><p>WordPress, B12, articoli SEO, DEM con Brevo, lead generation su LinkedIn.</p></div>
+ </div>
+</div></section>
+
+<section class="contact h-only" id="contatti"><div class="wrap">
+ <div class="meta mono"><span>07</span><span>Contatti</span><span>Roma</span></div>
+ <h2>Cerchi una social media manager?</h2>
+ <p style="max-width:34em;color:var(--mut);margin-bottom:18px">Scrivimi per un colloquio o per ricevere il CV completo.</p>
+ <div class="cl">
+  <a class="big" href="mailto:francescazara.smm@gmail.com">francescazara.smm@gmail.com</a>
+  <a class="mono" href="https://www.linkedin.com/in/francesca-zara-5a4574177">LinkedIn: linkedin.com/in/francesca-zara-5a4574177</a>
+ </div>
+</div></section>
+
+<section class="wrap endnote h-only">
+ <aside class="note" aria-label="Nota sulla riservatezza"><span class="mono">Nota sulla riservatezza</span><p>Per motivi di privacy aziendale non posso pubblicare la maggior parte dei lavori e delle campagne che ho realizzato. Nei progetti e nelle grafiche di questo portfolio ho rimosso i dati sensibili: nomi, volti e contatti delle persone, profili di terzi e informazioni riservate.</p></aside>
+</section>
+</main>
+
+<div class="wrap"><footer class="mono"><span>© Francesca Zara 2026</span></footer></div>
+
+<dialog id="lb"><button class="x" aria-label="Chiudi">✕</button><button class="nv pv" aria-label="Precedente">←</button><img alt=""><button class="nv nx" aria-label="Successiva">→</button></dialog>
+
+<script>
+{
+
+ const setView=()=>{const h=location.hash.slice(1);const proj=h==='progetti'||["gismondi", "agenzia", "upside", "inclusione", "grafiche"].includes(h);document.body.classList.toggle('vp',proj);if(matchMedia('(max-width:700px)').matches){if(h==='progetti'||h==='home'||!h)window.scrollTo(0,0);else{const el=document.getElementById(h);if(el)el.scrollIntoView()}}};
+ addEventListener('hashchange',setView);setView();
+ const lb=document.getElementById('lb'),li=lb.querySelector('img');let list=[],idx=0;
+ const show=()=>{li.src=list[idx].src;li.alt=list[idx].alt};
+ lb.querySelector('.x').addEventListener('click',()=>lb.close());
+ lb.querySelector('.pv').addEventListener('click',()=>{idx=(idx-1+list.length)%list.length;show()});
+ lb.querySelector('.nx').addEventListener('click',()=>{idx=(idx+1)%list.length;show()});
+ lb.addEventListener('click',e=>{if(e.target===lb)lb.close()});
+ lb.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){idx=(idx+1)%list.length;show()}if(e.key==='ArrowLeft'){idx=(idx-1+list.length)%list.length;show()}});
+ const rm=()=>matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth';
+ for(const car of document.querySelectorAll('[data-car]')){
+  const t=car.querySelector('.track'),figs=[...t.children],out=car.querySelector('output'),imgs=figs.map(f=>f.querySelector('img'));
+  const cur=()=>{let i=0,b=1e9;figs.forEach((f,k)=>{const d=Math.abs(f.offsetLeft-t.scrollLeft-figs[0].offsetLeft);if(d<b){b=d;i=k}});return i};
+  const upd=()=>{out.textContent=String(cur()+1).padStart(2,'0')+' / '+String(figs.length).padStart(2,'0')};
+  const go=d=>{const i=Math.max(0,Math.min(figs.length-1,cur()+d));t.scrollTo({left:figs[i].offsetLeft-figs[0].offsetLeft,behavior:rm()})};
+  car.querySelector('[data-p]').addEventListener('click',()=>go(-1));
+  car.querySelector('[data-n]').addEventListener('click',()=>go(1));
+  t.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();go(1)}if(e.key==='ArrowLeft'){e.preventDefault();go(-1)}});
+  t.addEventListener('scroll',()=>requestAnimationFrame(upd),{passive:true});
+  upd();
+  figs.forEach((f,k)=>{const bt=f.querySelector('button.z');if(bt)bt.addEventListener('click',()=>{list=imgs;idx=k;show();try{lb.showModal()}catch(e){}})});
+ }
+}
+</script>
+</body>
+</html>
